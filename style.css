@@ -6,17 +6,22 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family:'Poppins', sans-serif;
 }
 
-/* BODY */
+/* ================= BODY ================= */
 body{
     background: url("images/bg.jpg") no-repeat center center/cover;
-    height:100vh;
+    min-height:100vh;
     color:white;
 }
 
-/* NAVBAR */
+/* DASHBOARD BODY */
+.dashboard-body{
+    background: url("images/dashboard-bg.jpg") no-repeat center center/cover;
+}
+
+/* ================= NAVBAR ================= */
 .navbar{
     display:flex;
     justify-content:space-between;
@@ -26,21 +31,43 @@ body{
 }
 
 .navbar h2{
-    color:#60f106;   /* CHANGE HERE */
+    color:#60f106;
 }
 
 .navbar a{
-    color:white;   /* CHANGE HERE */
+    color:white;
     margin-left:20px;
     text-decoration:none;
-    font-weight:500;
 }
 
 .navbar a:hover{
-    color:#ff4b2b;   /* CHANGE HERE */
+    color:#ff4b2b;
 }
 
-/* HERO */
+/* ================= USER NAV (DASHBOARD) ================= */
+.user-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 50px;
+    background: rgba(0,0,0,0.7);
+}
+
+.user-nav h2{
+    color:#60f106;
+}
+
+.user-nav a{
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+}
+
+.user-nav a:hover{
+    color:#ff4b2b;
+}
+
+/* ================= HERO ================= */
 .hero{
     text-align:center;
     margin-top:120px;
@@ -48,16 +75,34 @@ body{
 
 .hero h1{
     font-size:50px;
-    color:#c86108;   /* CHANGE HERE */
+    color:#c86108;
 }
 
 .hero p{
     font-size:20px;
     margin:15px 0;
-    color:rgb(4, 175, 121);   /* CHANGE HERE */
+    color:rgb(4, 175, 121);
 }
 
-/* SEARCH BOX */
+/* DASHBOARD HERO */
+.hero-section{
+    text-align:center;
+    padding:60px 20px;
+    background: rgba(0,0,0,0.5);
+    margin:30px;
+    border-radius:20px;
+}
+
+.hero-section h1{
+    font-size:40px;
+    color:#ffcc00;
+}
+
+.hero-section p{
+    color:white;
+}
+
+/* ================= SEARCH BOX ================= */
 .search-box{
     margin-top:30px;
     background: rgba(255,255,255,0.1);
@@ -73,42 +118,34 @@ body{
     border:none;
     border-radius:8px;
     outline:none;
-    width:150px;
 }
 
 .search-box button{
     padding:12px 20px;
-    background: linear-gradient(to right, #ff4b2b, #ffcc00);  /* CHANGE HERE */
+    background: linear-gradient(to right, #ff4b2b, #ffcc00);
     color:white;
     border:none;
     border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
 }
 
-/* BUTTONS */
-.hero-buttons{
-    margin-top:20px;
-}
-
+/* ================= BUTTONS ================= */
 .btn{
     padding:12px 25px;
-    background:#ff4b2b;   /* CHANGE HERE */
+    background:#ff4b2b;
     color:white;
     text-decoration:none;
     border-radius:5px;
-    margin-right:10px;
 }
 
 .btn2{
     padding:12px 25px;
-    background:white;   /* CHANGE HERE */
-    color:black;        /* CHANGE HERE */
+    background:white;
+    color:black;
     text-decoration:none;
     border-radius:5px;
 }
 
-/* FEATURES */
+/* ================= FEATURES ================= */
 .features{
     display:flex;
     justify-content:center;
@@ -116,25 +153,24 @@ body{
 }
 
 .feature-card{
-    background:white;   /* CHANGE HERE */
-    color:black;        /* CHANGE HERE */
+    background:white;
+    color:black;
     padding:20px;
     margin:15px;
     border-radius:10px;
     width:200px;
     text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
 .feature-card h3{
-    color:#1e3c72;   /* CHANGE HERE */
+    color:#1e3c72;
 }
 
 .feature-card p{
-    color:#333;      /* CHANGE HERE */
+    color:#333;
 }
 
-/* FLIGHT CARDS */
+/* ================= FLIGHT CARDS ================= */
 .container{
     display:flex;
     flex-wrap:wrap;
@@ -143,26 +179,86 @@ body{
 }
 
 .card{
-    background:white;   /* CHANGE HERE */
+    background:white;
     color:black;
     padding:20px;
     margin:20px;
     border-radius:15px;
     width:250px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
 .card button{
     margin-top:10px;
     padding:10px;
     width:100%;
-    background:#1e3c72;   /* CHANGE HERE */
+    background:#1e3c72;
     color:white;
     border:none;
-    border-radius:5px;
 }
 
-/* AUTH PAGES */
+/* ================= DASHBOARD FLIGHTS ================= */
+.flights-section{
+    padding:40px 20px;
+    background: rgba(255,255,255,0.9);
+    margin-top:30px;
+    text-align:center;
+}
+
+.flight-card{
+    background:white;
+    color:black;
+    padding:20px;
+    margin:15px;
+    border-radius:10px;
+    display:inline-block;
+    width:260px;
+}
+
+.flight-card h3{
+    color:#1e3c72;
+}
+
+.flight-price{
+    color:green;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* ================= PROFILE ================= */
+.user-profile{
+    position:relative;
+    cursor:pointer;
+}
+
+.user-profile img{
+    width:40px;
+    border-radius:50%;
+}
+
+.profile-dropdown{
+    display:none;
+    position:absolute;
+    right:0;
+    top:50px;
+    background:white;
+    color:black;
+    padding:10px;
+    border-radius:10px;
+    width:200px;
+}
+
+.profile-dropdown a{
+    display:block;
+    padding:8px;
+    color:black;
+    text-decoration:none;
+}
+
+.profile-dropdown a:hover{
+    color:#ff4b2b;
+}
+
+/* ================= AUTH PAGES ================= */
 .auth-container{
     display:flex;
     justify-content:center;
@@ -190,12 +286,12 @@ body{
 .auth-box button{
     width:100%;
     padding:10px;
-    background:#ff4b2b;   /* CHANGE HERE */
+    background:#ff4b2b;
     color:white;
     border:none;
     border-radius:5px;
 }
 
 .auth-box a{
-    color:#ff4b2b;   /* CHANGE HERE */
+    color:#ff4b2b;
 }

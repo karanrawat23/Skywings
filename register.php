@@ -3,14 +3,25 @@ include 'db.php';
 
 $name = $_POST['name'];
 $email = $_POST['email'];
+
+// 🔥 PASSWORD HASHING
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("INSERT INTO users(name, email, password) VALUES(?, ?, ?)");
-$stmt->bind_param("sss", $name, $email, $password);
+// 👉 CHECK EMAIL ALREADY EXISTS
+$check = $conn->query("SELECT * FROM users WHERE email='$email'");
 
-if ($stmt->execute()) {
-    header("Location: login.html?msg=registered");
+if($check->num_rows > 0){
+    echo "<script>alert('Email already exists'); window.location='register.html';</script>";
 } else {
-    echo "Registration failed. Try again.";
+
+    // ✅ INSERT QUERY (yaha $password use ho raha hai)
+    $sql = "INSERT INTO users (name, email, password) 
+            VALUES ('$name', '$email', '$password')";
+
+    if($conn->query($sql)){
+        echo "<script>alert('Registration Successful'); window.location='login.html';</script>";
+    } else {
+        echo "Error";
+    }
 }
 ?>

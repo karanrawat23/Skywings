@@ -5,23 +5,21 @@ include 'db.php';
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+// Query to find user
+$result = $conn->query("SELECT * FROM users WHERE email='$email'");
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
+    // Verify password
     if (password_verify($password, $row['password'])) {
-        $_SESSION['user_id']    = $row['id'];
-        $_SESSION['user_name']  = $row['name'];
-        $_SESSION['user_email'] = $row['email'];
+        $_SESSION['user_id'] = $row['id'];
         header("Location: dashboard.php");
+        exit();
     } else {
-        echo "<p style='color:red;text-align:center;'>Wrong password. <a href='login.html'>Try again</a></p>";
+        echo "<script>alert('Wrong Password'); window.location='login.html';</script>";
     }
 } else {
-    echo "<p style='color:red;text-align:center;'>User not found. <a href='register.html'>Register</a></p>";
+    echo "<script>alert('Email not found'); window.location='login.html';</script>";
 }
 ?>
