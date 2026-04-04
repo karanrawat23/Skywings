@@ -1,16 +1,19 @@
 <?php
 session_start();
 
-header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Cache-Control: no-cache, no-store, must-revalidate, max-age=0");
 header("Pragma: no-cache");
-header("Expires: 0");
+header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 
+// Strong session check
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    echo "<script>localStorage.clear(); sessionStorage.clear(); window.location.href='login.html';</script>";
     exit();
 }
 
+include 'db.php';
 // Rest of your code...
+
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

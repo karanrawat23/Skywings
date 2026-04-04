@@ -1,15 +1,17 @@
 <?php
 session_start();
 
-header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Cache-Control: no-cache, no-store, must-revalidate, max-age=0");
 header("Pragma: no-cache");
-header("Expires: 0");
+header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 
+// Strong session check
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    echo "<script>localStorage.clear(); sessionStorage.clear(); window.location.href='login.html';</script>";
     exit();
 }
 
+include 'db.php';
 // Rest of your code...
 
 
@@ -50,7 +52,7 @@ ORDER BY bookings.created_at DESC");
 
         .bookings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
 
@@ -67,7 +69,6 @@ ORDER BY bookings.created_at DESC");
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
-        /* Card Header */
         .booking-header {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
@@ -106,7 +107,6 @@ ORDER BY bookings.created_at DESC");
             color: white;
         }
 
-        /* Card Body */
         .booking-body {
             padding: 20px;
         }
@@ -178,7 +178,6 @@ ORDER BY bookings.created_at DESC");
             border-top: 2px solid #f0f0f0;
         }
 
-        /* Card Footer */
         .booking-footer {
             padding: 15px 20px;
             background: #f8f9fa;
@@ -196,7 +195,6 @@ ORDER BY bookings.created_at DESC");
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            transition: background 0.3s;
         }
 
         .btn-view:hover {
@@ -212,7 +210,6 @@ ORDER BY bookings.created_at DESC");
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            transition: background 0.3s;
         }
 
         .btn-cancel:hover {
@@ -240,25 +237,6 @@ ORDER BY bookings.created_at DESC");
 
         .no-bookings p {
             color: #ccc;
-        }
-
-        .back-btn {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .back-btn a {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #ff4b2b;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-
-        .back-btn a:hover {
-            background: #e63e1f;
         }
 
         .booking-ref-small {
@@ -289,7 +267,6 @@ ORDER BY bookings.created_at DESC");
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="booking-card">
-                    <!-- Header -->
                     <div class="booking-header">
                         <div class="flight-name-header">
                             <i class="fa-solid fa-plane"></i> <?php echo htmlspecialchars($row['flight_name']); ?>
@@ -302,7 +279,6 @@ ORDER BY bookings.created_at DESC");
                         </div>
                     </div>
 
-                    <!-- Body -->
                     <div class="booking-body">
                         <div class="route-info">
                             <span class="city-from"><?php echo htmlspecialchars($row['source']); ?></span>
@@ -343,7 +319,6 @@ ORDER BY bookings.created_at DESC");
                         </div>
                     </div>
 
-                    <!-- Footer -->
                     <?php if ($row['status'] == 'Booked'): ?>
                         <div class="booking-footer">
                             <button class="btn-view" onclick="viewTicket(<?php echo $row['id']; ?>)">
@@ -367,17 +342,11 @@ ORDER BY bookings.created_at DESC");
             </div>
         <?php endif; ?>
     </div>
-
-    <?php if ($result->num_rows > 0): ?>
-        <div class="back-btn">
-            <a href="dashboard.php"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
-        </div>
-    <?php endif; ?>
 </div>
 
 <script>
 function cancelBooking(id) {
-    if(confirm("Are you sure you want to cancel this booking? Seats will be restored.")) {
+    if(confirm("Are you sure you want to cancel this booking?")) {
         window.location.href = "cancel.php?id=" + id;
     }
 }
